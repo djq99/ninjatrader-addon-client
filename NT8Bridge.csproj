@@ -11,6 +11,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -65,12 +66,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
   </ItemGroup>
 
+  <!-- Note: .NET SDK automatically includes all .cs files by default -->
+  <!-- Explicit Compile items removed to avoid duplicates -->
+  
   <ItemGroup>
-    <Compile Include="Addon\**\*.cs" />
-    <Compile Include="Core\**\*.cs" />
-    <Compile Include="StrategyBridge\**\*.cs" />
-    <Compile Include="Util\**\*.cs" />
-    <Compile Include="Tests\**\*.cs" />
+    <!-- WPF XAML files -->
+    <Page Include="Addon\**\*.xaml" />
   </ItemGroup>
 
   <PropertyGroup>
