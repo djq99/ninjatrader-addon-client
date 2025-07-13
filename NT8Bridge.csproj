@@ -1,0 +1,92 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>NT8Bridge</AssemblyName>
+    <RootNamespace>NT8Bridge</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU</Platforms>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- NinjaTrader 8 SDK References -->
+    <Reference Include="NinjaTrader.Core">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NinjaTrader.Gui">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.Gui.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NinjaTrader.Data">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NinjaTrader.Cbi">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.Cbi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NinjaTrader.NinjaScript">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.NinjaScript.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <!-- .NET Framework References -->
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- NuGet Packages -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Addon\**\*.cs" />
+    <Compile Include="Core\**\*.cs" />
+    <Compile Include="StrategyBridge\**\*.cs" />
+    <Compile Include="Util\**\*.cs" />
+    <Compile Include="Tests\**\*.cs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);NINJATRADER8</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Post-build event to copy DLL to NinjaTrader bin directory -->
+  <PropertyGroup>
+    <PostBuildEvent>
+      if exist "$(NINJATRADER8)\bin\Custom\AddOns" (
+        copy "$(TargetPath)" "$(NINJATRADER8)\bin\Custom\AddOns\"
+      ) else (
+        mkdir "$(NINJATRADER8)\bin\Custom\AddOns"
+        copy "$(TargetPath)" "$(NINJATRADER8)\bin\Custom\AddOns\"
+      )
+    </PostBuildEvent>
+  </PropertyGroup>
+
+</Project> 
