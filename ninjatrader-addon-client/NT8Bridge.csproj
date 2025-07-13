@@ -37,6 +37,10 @@
       <HintPath>$(NINJATRADER8)\bin\NinjaTrader.NinjaScript.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="NinjaTrader.Vendor">
+      <HintPath>$(NINJATRADER8)\bin\NinjaTrader.Vendor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     
     <!-- .NET Framework References -->
     <Reference Include="System" />
@@ -54,14 +58,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- NuGet Packages -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
@@ -72,6 +78,8 @@
 
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);NINJATRADER8</DefineConstants>
+    <!-- Fallback for NINJATRADER8 environment variable -->
+    <NINJATRADER8 Condition="'$(NINJATRADER8)' == ''">C:\Program Files\NinjaTrader 8</NINJATRADER8>
   </PropertyGroup>
 
   <!-- Post-build event to copy DLL to NinjaTrader bin directory -->
