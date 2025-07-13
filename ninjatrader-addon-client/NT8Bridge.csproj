@@ -12,7 +12,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
-    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -67,13 +67,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
   </ItemGroup>
 
-  <!-- Note: .NET SDK automatically includes all .cs files by default -->
-  <!-- Page items are explicitly included to avoid SDK conflicts -->
-  
-  <ItemGroup>
-    <!-- WPF XAML files -->
-    <Page Include="Addon\ConfigWindow.xaml" />
-  </ItemGroup>
+  <!-- Note: .NET SDK automatically includes all .cs and .xaml files by default -->
+  <!-- No explicit includes to avoid duplicates -->
 
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);NINJATRADER8</DefineConstants>
